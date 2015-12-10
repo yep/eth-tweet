@@ -1,0 +1,14 @@
+Creation: 45718 + 467800
+External:
+  adminDeleteRegistry(): 421
+  adminRetrieveDonations(): 34507
+  adminSetAccountAdministrator(address): 20475
+  adminSetRegistrationDisabled(bool): 20500
+  adminUnregister(string): unknown
+  getAddressOfId(uint256): 563
+  getAddressOfName(string): unknown
+  getNameOfAddress(address): unknown
+  getNumberOfAccounts(): 239
+  register(string,address): unknown
+  unregister(): unknown
+Internal:

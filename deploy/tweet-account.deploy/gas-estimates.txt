@@ -1,0 +1,11 @@
+Creation: 25378 + 253600
+External:
+  adminDeleteAccount(): 372
+  adminRetrieveDonations(address): 34479
+  getLatestTweet(): unknown
+  getNumberOfTweets(): 353
+  getOwnerAddress(): 286
+  getTweet(uint256): unknown
+  isAdmin(): 365
+  tweet(string): unknown
+Internal:

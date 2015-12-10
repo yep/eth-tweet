@@ -1,0 +1,8 @@
+3e450fff adminDeleteAccount()
+5c3e426c adminRetrieveDonations(address)
+ae978f08 getLatestTweet()
+ca7dc5b1 getNumberOfTweets()
+0c4f65bd getOwnerAddress()
+c3ad5ecb getTweet(uint256)
+b6db75a0 isAdmin()
+fb46d4c5 tweet(string)
