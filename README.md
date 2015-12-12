@@ -35,7 +35,7 @@ In a second shell, start the interactive geth interface by running
 
 `geth attach`
 
-Your promt should change to `>`
+Your prompt should change to `>`
 
 As a test, get the status by entering:
 
