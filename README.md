@@ -213,7 +213,7 @@ Check your account balance in the ether (eth) currency:
 
 Get number of pending transactions:
 
-eth.getBlockTransactionCount("pending")
+`eth.getBlockTransactionCount("pending")`
 
 
 License
