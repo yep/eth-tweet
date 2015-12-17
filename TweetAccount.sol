@@ -27,10 +27,10 @@ contract TweetAccount {
 	// "array" of all tweets of this account: maps the tweet id to the actual tweet
 	mapping (uint => Tweet) _tweets;
 	
-	// counter variable for the above mappings _tweets mapping
+	// total number of tweets in the above _tweets mapping
 	uint _numberOfTweets;
 	
-	// only admin is allowed to tweet for this account
+	// "owner" of this account: only admin is allowed to tweet
 	address _adminAddress;
 	
 	// constructor
@@ -39,6 +39,7 @@ contract TweetAccount {
 		_adminAddress = msg.sender;
 	}
 	
+	// returns true if caller of function ("sender") is admin
 	function isAdmin() constant returns (bool isAdmin) {
 		return msg.sender == _adminAddress;
 	}
@@ -46,7 +47,7 @@ contract TweetAccount {
 	// create new tweet
 	function tweet(string tweetString) constant returns (int result) {
 		if (!isAdmin()) {
-			// only owner is allowed to tweet for this account
+			// only owner is allowed to create tweets for this account
 			result = -1;
 		} else if (bytes(tweetString).length > 160) {
 			// tweet contains more than 160 bytes
@@ -80,6 +81,7 @@ contract TweetAccount {
 		return _numberOfTweets;
 	}
 
+	// other users can send donations to your account: use this function for donation withdrawal
 	function adminRetrieveDonations(address receiver) {
 		if (isAdmin()) {
 			receiver.send(this.balance);
