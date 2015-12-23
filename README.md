@@ -5,19 +5,19 @@ This repository contains the code of a decentralized microblogging service runni
 
 The service provides basic Twitter-like functionality to tweet messages of up to 160 characters.
 
-Here, decentralization means there is no company or central authority in control of what is being published.
+Here, `decentralization` means there is no company or central authority in control of what is being published.
 
-The system is censorship resistant in the sense that once a message is published, it can only be removed by the publisher.
+The system is `censorship resistant` in the sense that once a message is published, it can only be removed by the publisher.
 
-Accounts can receive donations in Ethereum's `Ether` crypto currency. Being able to receive donations can be an incentive to run a decentralized microblogging feed.
+All accounts can receive `donations` in Ethereum's Ether crypto currency. Being able to receive donations can be an incentive to run a decentralized microblogging feed.
 
-To not expose the social graph to the world, following other accounts is not supported on purpose. However, you could still implement this feature on the client side.
+To not expose the user's social graph to the world, following other accounts is not supported on purpose. However, you could still implement this feature on the client side.
 
 
 Ether
 -----
 
-For account creation, registration and tweeting, you have to get `Ether`. You can either buy `Ether` for Dollar/Euro or trade `Ether` for Bitcoin. Instructions can be found here: [ethereum.org/ether](https://www.ethereum.org/ether). For example, you can use the [kraken.com](https://kraken.com) crypto currency exchange.
+For account creation, registration and tweeting, you have to get Ethereum's crypto currency `Ether`. You can either buy `Ether` for Dollar/Euro or trade `Ether` for Bitcoin. Instructions can be found here: [ethereum.org/ether](https://www.ethereum.org/ether). For example, you can use the [kraken.com](https://kraken.com) crypto currency exchange.
 
 At time of writing, pricing is as follows:
 
@@ -25,7 +25,9 @@ Price of account creation and registration: `0.02384905 ether` or `$0.020271693`
 
 Price per Tweet: `0.00420185 ether` or `$0.0035715725` or `€0.0032405508` or `roughly one third of a cent`
 
-For current rates see the currency pairs `eth/usd` and `eth/eur` on [kraken.com/charts](https://www.kraken.com/charts).
+For current rates see the currency pairs `eth/usd` or `eth/eur` on [kraken.com/charts](https://www.kraken.com/charts).
+
+If you like this project, please consider sending donations in Ether to `0x93a4a6c05c5cfb945f6ccaea223723561670c204` or donations in Bitcoin to `3PyW7MNRJzpw13JFVendeTFt7dcXmFq4pd`.
 
 
 Install
@@ -160,6 +162,8 @@ var TweetRegistry = eth.contract([{"constant":false,"inputs":[{"name":"name","ty
 Register account name `test` for the account `MyTweetAccount` in the `TweetRegistry`:
 
 `TweetRegistry.register.sendTransaction("test", MyTweetAccount.address, {from: eth.coinbase, gas: 200000})`
+
+In the above example, you'll have to change the name "test" since this name is already registered!
 
 
 Browse Accounts
