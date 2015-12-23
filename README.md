@@ -14,6 +14,18 @@ All accounts can receive `donations` in Ethereum's Ether crypto currency. Being 
 To not expose the user's social graph to the world, following other accounts is not supported on purpose. However, you could still implement this feature on the client side.
 
 
+Table Of Contents
+-----------------
+
+ - [Ether](#ether)
+ - [Install](#install)
+ - [Read Tweets](#read-tweets)
+ - [Create an Account](#create-an-account)
+ - [Tweet](#tweet)
+ - [Register Account Name](#register-account-name)
+ - [Browse Accounts](#browse-accounts)
+
+
 Ether
 -----
 
@@ -54,7 +66,7 @@ Edit the source files with the Ethereum's Mix IDE which can be found in the [rel
 All commands below assume you are in the interactive geth interface.
 
 
-Read tweets
+Read Tweets
 -----------
 
 An example how to read tweets of an existing account.
@@ -90,7 +102,7 @@ Get a specific tweet. For example, get the first tweet, tweet number 0:
 `TweetAccount.getTweet(0)`
 
 
-Create an account
+Create an Account
 -----------------
 
 Create a new account and make it known to the world by registering an account name in the registry.
@@ -159,11 +171,9 @@ Create a variable for the account registry. Copy and paste the following block i
 var TweetRegistry = eth.contract([{"constant":false,"inputs":[{"name":"name","type":"string"}],"name":"adminUnregister","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"accountAddress","type":"address"}],"name":"register","outputs":[{"name":"result","type":"int256"}],"type":"function"},{"constant":true,"inputs":[],"name":"getNumberOfAccounts","outputs":[{"name":"numberOfAccounts","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[],"name":"adminRetrieveDonations","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"name","type":"string"}],"name":"getAddressOfName","outputs":[{"name":"addr","type":"address"}],"type":"function"},{"constant":false,"inputs":[],"name":"adminDeleteRegistry","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"accountAdmin","type":"address"}],"name":"adminSetAccountAdministrator","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"registrationDisabled","type":"bool"}],"name":"adminSetRegistrationDisabled","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getNameOfAddress","outputs":[{"name":"name","type":"string"}],"type":"function"},{"constant":false,"inputs":[],"name":"unregister","outputs":[{"name":"unregisteredAccountName","type":"string"}],"type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getAddressOfId","outputs":[{"name":"addr","type":"address"}],"type":"function"},{"inputs":[],"type":"constructor"}]).at("0xe0f278b72097e563b09d7dc94c6f75aff5e83298"); TweetRegistry
 ```
 
-Register account name `test` for the account `MyTweetAccount` in the `TweetRegistry`:
+Register account name `test` for the account `MyTweetAccount` (from the previous example) into the `TweetRegistry`. Please note you have to use a different account name than "test" since it is already taken.
 
 `TweetRegistry.register.sendTransaction("test", MyTweetAccount.address, {from: eth.coinbase, gas: 200000})`
-
-In the above example, you'll have to change the name "test" since this name is already registered!
 
 
 Browse Accounts
