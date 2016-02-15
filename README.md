@@ -14,16 +14,18 @@ All accounts can receive `donations` in Ethereum's Ether crypto currency. Being 
 To not expose the user's social graph to the world, following other accounts is not supported on purpose. However, you could still implement this feature on the client side.
 
 
-Table Of Contents
------------------
+Contents
+--------
 
  - [Ether](#ether)
  - [Install](#install)
  - [Read Tweets](#read-tweets)
  - [Create an Account](#create-an-account)
- - [Tweet](#tweet)
+ - [Post a new Tweet](#post-a-new-tweet)
  - [Register Account Name](#register-account-name)
  - [Browse Accounts](#browse-accounts)
+ - [Solidity API](#solidity-api)
+ - [Web3 Javascript API](#web3-javascript-api)
 
 
 Ether
@@ -130,12 +132,12 @@ You can use the `adminRetrieveDonations()` function to withdraw donations your a
 Section `Register Account Name` explains how you can assign a name to this account address so others can find your account by name.
 
 
-Tweet
------
+Post a new Tweet
+----------------
 
 This example tweets `hello world` with the `MyTweetAccount` created above:
 
-`MyTweetAccount.tweet.sendTransaction("hello world", {from: eth.coinbase})`
+`MyTweetAccount.tweet.sendTransaction("hello world", {from: eth.coinbase, gas: 200000})`
 
 Note that you have to own `Ether` to be able to tweet. See previous example how to check your account balance.
 
@@ -253,6 +255,13 @@ Get number of pending transactions:
 
 `eth.getBlockTransactionCount("pending")`
 
+
+Links
+-----
+
+ - https://news.ycombinator.com/item?id=10711843
+ - https://www.reddit.com/r/ethereum/comments/3w8za8/decentralised_twitter_microblogging_on_the/
+ - http://korben.info/un-clone-de-twitter-qui-utilise-la-blockchain.html
 
 License
 -------
