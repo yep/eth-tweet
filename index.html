@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>EthTweet by yep</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">EthTweet</h1>
+      <h2 class="project-tagline">Microblogging on the Ethereum Blockchain</h2>
+      <a href="https://github.com/yep/eth-tweet" class="btn">View on GitHub</a>
+      <a href="https://github.com/yep/eth-tweet/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/yep/eth-tweet/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="decentralized-twitter" class="anchor" href="#decentralized-twitter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Decentralized Twitter</h1>
+
+<p>This repository contains the code of a decentralized microblogging service running on the <a href="https://ethereum.org">Ethereum</a> blockchain.</p>
+
+<p>The service provides basic Twitter-like functionality to tweet messages of up to 160 characters.</p>
+
+<p>Here, <code>decentralization</code> means there is no company or central authority in control of what is being published.</p>
+
+<p>The system is <code>censorship resistant</code> in the sense that once a message is published, it can only be removed by the publisher.</p>
+
+<p>All accounts can receive <code>donations</code> in Ethereum's Ether crypto currency. Being able to receive donations can be an incentive to run a decentralized microblogging feed.</p>
+
+<p>To not expose the user's social graph to the world, following other accounts is not supported on purpose. However, you could still implement this feature on the client side.</p>
+
+<h2>
+<a id="contents" class="anchor" href="#contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contents</h2>
+
+<ul>
+<li><a href="#ether">Ether</a></li>
+<li><a href="#install">Install</a></li>
+<li><a href="#read-tweets">Read Tweets</a></li>
+<li><a href="#create-an-account">Create an Account</a></li>
+<li><a href="#post-a-new-tweet">Post a new Tweet</a></li>
+<li><a href="#register-account-name">Register Account Name</a></li>
+<li><a href="#browse-accounts">Browse Accounts</a></li>
+<li><a href="#solidity-api">Solidity API</a></li>
+<li><a href="#web3-javascript-api">Web3 Javascript API</a></li>
+</ul>
+
+<h2>
+<a id="ether" class="anchor" href="#ether" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ether</h2>
+
+<p>For account creation, registration and tweeting, you have to get Ethereum's crypto currency <code>Ether</code>. You can either buy <code>Ether</code> for Dollar/Euro or trade <code>Ether</code> for Bitcoin. Instructions can be found here: <a href="https://www.ethereum.org/ether">ethereum.org/ether</a>. For example, you can use the <a href="https://kraken.com">kraken.com</a> crypto currency exchange.</p>
+
+<p>At time of writing, pricing is as follows:</p>
+
+<p>Price of account creation and registration: <code>0.02384905 ether</code> or <code>$0.020271693</code> or <code>€0,018392864</code> or <code>roughly 2 cents</code></p>
+
+<p>Price per Tweet: <code>0.00420185 ether</code> or <code>$0.0035715725</code> or <code>€0.0032405508</code> or <code>roughly one third of a cent</code></p>
+
+<p>For current rates see the currency pairs <code>eth/usd</code> or <code>eth/eur</code> on <a href="https://www.kraken.com/charts">kraken.com/charts</a>.</p>
+
+<p>If you like this project, please consider sending donations in Ether to <code>0x93a4a6c05c5cfb945f6ccaea223723561670c204</code> or donations in Bitcoin to <code>3PyW7MNRJzpw13JFVendeTFt7dcXmFq4pd</code>.</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+<p><a href="https://www.ethereum.org/cli">Install geth</a> and start it by entering</p>
+
+<p><code>geth</code></p>
+
+<p>In a second shell, start the interactive geth interface by running</p>
+
+<p><code>geth attach</code></p>
+
+<p>Your prompt should change to <code>&gt;</code></p>
+
+<p>As a test, get the status by entering:</p>
+
+<p><code>&gt; eth</code></p>
+
+<p>You should see various ethereum statistics like the current block number.</p>
+
+<p>Edit the source files with the Ethereum's Mix IDE which can be found in the <a href="https://github.com/ethereum/webthree-umbrella/releases">releases</a>. There is a <code>.mix</code> Mix IDE project file in the repository, it also contains some test cases used during development and can simulate a local blockchain for testing.</p>
+
+<p>All commands below assume you are in the interactive geth interface.</p>
+
+<h2>
+<a id="read-tweets" class="anchor" href="#read-tweets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read Tweets</h2>
+
+<p>An example how to read tweets of an existing account.</p>
+
+<p>See section <code>Browse Accounts</code> below, to learn how to explore all existing accounts.</p>
+
+<p>Create a local variable <code>TweetAccount</code> to point to the existing account. Here, the address of the test account <code>0x9e82d1745c6c9c04a6cfcde102837cf0f25efc56</code> is used. Change this address in the code block below to read tweets of other accounts.</p>
+
+<p>Copy the following code block and paste it into the interactive geth interface:</p>
+
+<pre><code>var TweetAccount = web3.eth.contract([{"constant":true,"inputs":[],"name":"getOwnerAddress","outputs":[{"name":"adminAddress","type":"address"}],"type":"function"},{"constant":false,"inputs":[],"name":"adminDeleteAccount","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"receiver","type":"address"}],"name":"adminRetrieveDonations","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"getLatestTweet","outputs":[{"name":"tweetString","type":"string"},{"name":"timestamp","type":"uint256"},{"name":"numberOfTweets","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"isAdmin","outputs":[{"name":"isAdmin","type":"bool"}],"type":"function"},{"constant":true,"inputs":[{"name":"tweetId","type":"uint256"}],"name":"getTweet","outputs":[{"name":"tweetString","type":"string"},{"name":"timestamp","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"getNumberOfTweets","outputs":[{"name":"numberOfTweets","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[{"name":"tweetString","type":"string"}],"name":"tweet","outputs":[{"name":"result","type":"int256"}],"type":"function"},{"inputs":[],"type":"constructor"}]).at("0x9e82d1745c6c9c04a6cfcde102837cf0f25efc56"); TweetAccount
+</code></pre>
+
+<p>Get latest tweet of the account with:</p>
+
+<p><code>TweetAccount.getLatestTweet()</code></p>
+
+<p>Expected result is:</p>
+
+<p><code>["hello world", 1446832323, 1]</code></p>
+
+<p>The resulting JSON array contains: <code>[tweet string, timestamp of tweet, total number of tweets]</code>.</p>
+
+<p>Use a tool like <a href="http://www.unixtimestamp.com">unixtimestamp.com</a> to convert timestamps.</p>
+
+<p>Get total number of tweets:</p>
+
+<p><code>TweetAccount.getNumberOfTweets()</code></p>
+
+<p>Get a specific tweet. For example, get the first tweet, tweet number 0:</p>
+
+<p><code>TweetAccount.getTweet(0)</code></p>
+
+<h2>
+<a id="create-an-account" class="anchor" href="#create-an-account" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create an Account</h2>
+
+<p>Create a new account and make it known to the world by registering an account name in the registry.</p>
+
+<p>To be able to create an account, you have to own some <code>Ether</code> in the local account created by geth. Check local account balance:</p>
+
+<p><code>web3.fromWei(eth.getBalance(eth.coinbase), "ether")</code></p>
+
+<p>Copy and paste the following block into the geth interface to deploy your account code to the ethereum blockchain:</p>
+
+<pre><code>var MyTweetAccount = web3.eth.contract([{"constant":true,"inputs":[],"name":"getOwnerAddress","outputs":[{"name":"adminAddress","type":"address"}],"type":"function"},{"constant":false,"inputs":[],"name":"adminDeleteAccount","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"receiver","type":"address"}],"name":"adminRetrieveDonations","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"getLatestTweet","outputs":[{"name":"tweetString","type":"string"},{"name":"timestamp","type":"uint256"},{"name":"numberOfTweets","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"isAdmin","outputs":[{"name":"isAdmin","type":"bool"}],"type":"function"},{"constant":true,"inputs":[{"name":"tweetId","type":"uint256"}],"name":"getTweet","outputs":[{"name":"tweetString","type":"string"},{"name":"timestamp","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"getNumberOfTweets","outputs":[{"name":"numberOfTweets","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[{"name":"tweetString","type":"string"}],"name":"tweet","outputs":[{"name":"result","type":"int256"}],"type":"function"},{"inputs":[],"type":"constructor"}]).new( { from: web3.eth.accounts[0], data: '6060604052600060015560028054600160a060020a031916331790556104f4806100296000396000f36060604052361561006c5760e060020a60003504630c4f65bd811461006e5780633e450fff146100815780635c3e426c1461008c578063ae978f081461009a578063b6db75a014610118578063c3ad5ecb14610134578063ca7dc5b1146101b0578063fb46d4c5146101bb575b005b61020f600254600160a060020a03165b90565b61006c6104df61011c565b61006c6004356104b361011c565b604080516020818101835260008083526001805460001990810183528284528551868420830180546002948116156101000290930190921692909204601f810185900485028301850190965285825261022c95929384939083018282801561048b5780601f106104605761010080835404028352916020019161048b565b6102a85b600254600160a060020a03908116339091161461007e565b6040805160208181018352600080835260043580825281835284518583206001908101805460029281161561010002600019011691909104601f81018690048602830186019097528682526102ba96929594919290918301828280156104445780601f1061041957610100808354040283529160200191610444565b6102a860015461007e565b6102a86004808035906020019082018035906020019191908080601f01602080910402602001604051908101604052809392919081815260200183838082843750949650505050505050600061032f61011c565b60408051600160a060020a03929092168252519081900360200190f35b60405180806020018481526020018381526020018281038252858181518152602001915080519060200190808383829060006004602084601f0104600302600f01f150905090810190601f1680156102985780820380516001836020036101000a031916815260200191505b5094505050505060405180910390f35b60408051918252519081900360200190f35b60405180806020018381526020018281038252848181518152602001915080519060200190808383829060006004602084601f0104600302600f01f150905090810190601f1680156103205780820380516001836020036101000a031916815260200191505b50935050505060405180910390f35b151561033e57506000196103e0565b60a08251111561035157506001196103e0565b6001805460009081526020818152604080832042905583548352822085519084018054818552938390209094600290851615610100026000190190941693909304601f90810183900484019391928701908390106103e557805160ff19168380011785555b506103d29291505b8082111561041557600081556001016103be565b505060018054810190555060005b919050565b828001600101855582156103b6579182015b828111156103b65782518260005055916020019190600101906103f7565b5090565b820191906000526020600020905b81548152906001019060200180831161042757829003601f168201915b5050506000958652505060208490526040909320549293915050565b820191906000526020600020905b81548152906001019060200180831161046e57829003601f168201915b5050600154600019810160009081526020819052604090205494989497509550929350505050565b156104dc57604051600160a060020a03828116916000913016319082818181858883f150505050505b50565b156104f257600254600160a060020a0316ff5b56', gas: 3000000 }, function(e, contract){ if (typeof contract.address != 'undefined') { console.log(e, contract); console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash); } })
+</code></pre>
+
+<p>If you are curious how this ethereum byte code was created, have a look at the <code>deploy</code> directory in this repository. Also, have a look at the <code>TweetAccount.sol</code> source file, it contains a lot of comments to explain what the code does.</p>
+
+<p>After some time, you should see a message like:</p>
+
+<p><code>Contract mined! address: 0x9e82d1745c6c9c04a6cfcde102837cf0f25efc56 transactionHash: 0xd458166ead4d6d398fd0c76616d57093798e86716dd4169d2846295223768f1f</code></p>
+
+<p>Congratulations! You just wrote your first code to the blockchain and successfully created your account!</p>
+
+<p>You can use the <code>adminRetrieveDonations()</code> function to withdraw donations your account received, see <code>Solidity API</code> section below.</p>
+
+<p>Section <code>Register Account Name</code> explains how you can assign a name to this account address so others can find your account by name.</p>
+
+<h2>
+<a id="post-a-new-tweet" class="anchor" href="#post-a-new-tweet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Post a new Tweet</h2>
+
+<p>This example tweets <code>hello world</code> with the <code>MyTweetAccount</code> created above:</p>
+
+<p><code>MyTweetAccount.tweet.sendTransaction("hello world", {from: eth.coinbase, gas: 200000})</code></p>
+
+<p>Note that you have to own <code>Ether</code> to be able to tweet. See previous example how to check your account balance.</p>
+
+<p>You should see a message like <code>I1210 13:33:35.411646   58618 xeth.go:1028] Tx(0x8b253799a87efd08133e4f2b7dcece785a05d6de075c92435da48cb61009ac7e) to: 0x9e82d1745c6c9c04a6cfcde102837cf0f25efc56</code> in the geth logs.</p>
+
+<p>Check:</p>
+
+<p><code>MyTweetAccount.getLatestTweet()</code></p>
+
+<p>Should display <code>["hello world", 1449750863, 1]</code>. That means latest tweet is <code>hello world</code>, tweetet at unix timestamp <code>1449750863</code> with a total of <code>1</code> tweets for this account. Use a tool like <a href="http://www.unixtimestamp.com">unixtimestamp.com</a> to convert timestamps.</p>
+
+<p>More checks:</p>
+
+<p><code>MyTweetAccount.getNumberOfTweets()</code></p>
+
+<p>Should return <code>1</code></p>
+
+<p><code>MyTweetAccount.getTweet(0)</code></p>
+
+<p>Should return <code>["hello world", 1449750863, 1]</code></p>
+
+<h2>
+<a id="register-account-name" class="anchor" href="#register-account-name" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Register Account Name</h2>
+
+<p>To make your account known to the world, give it a name and register it in the account registry.</p>
+
+<p>Then, others only have to remember your account name and do not need to write down the long and complicated account address.</p>
+
+<p>Create a variable for the account registry. Copy and paste the following block into the geth interface:</p>
+
+<pre><code>var TweetRegistry = eth.contract([{"constant":false,"inputs":[{"name":"name","type":"string"}],"name":"adminUnregister","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"accountAddress","type":"address"}],"name":"register","outputs":[{"name":"result","type":"int256"}],"type":"function"},{"constant":true,"inputs":[],"name":"getNumberOfAccounts","outputs":[{"name":"numberOfAccounts","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[],"name":"adminRetrieveDonations","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"name","type":"string"}],"name":"getAddressOfName","outputs":[{"name":"addr","type":"address"}],"type":"function"},{"constant":false,"inputs":[],"name":"adminDeleteRegistry","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"accountAdmin","type":"address"}],"name":"adminSetAccountAdministrator","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"registrationDisabled","type":"bool"}],"name":"adminSetRegistrationDisabled","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getNameOfAddress","outputs":[{"name":"name","type":"string"}],"type":"function"},{"constant":false,"inputs":[],"name":"unregister","outputs":[{"name":"unregisteredAccountName","type":"string"}],"type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getAddressOfId","outputs":[{"name":"addr","type":"address"}],"type":"function"},{"inputs":[],"type":"constructor"}]).at("0xe0f278b72097e563b09d7dc94c6f75aff5e83298"); TweetRegistry
+</code></pre>
+
+<p>Register account name <code>test</code> for the account <code>MyTweetAccount</code> (from the previous example) into the <code>TweetRegistry</code>. Please note you have to use a different account name than "test" since it is already taken.</p>
+
+<p><code>TweetRegistry.register.sendTransaction("test", MyTweetAccount.address, {from: eth.coinbase, gas: 200000})</code></p>
+
+<h2>
+<a id="browse-accounts" class="anchor" href="#browse-accounts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Browse Accounts</h2>
+
+<p>Access accounts by name without having to use the account address directly. You can also look up all existing accounts.</p>
+
+<p>Use the <code>TweetRegistry</code> variable created in the previous section to look up accounts. Once you know the address of the account you want to read, use instructions in section <code>Read Tweets</code> to continue.</p>
+
+<p>Get address of account called <code>test</code>: <code>TweetRegistry.getAddressOfName("test")</code></p>
+
+<p>Get total amount of accounts registered: <code>TweetRegistry.getNumberOfAccounts()</code></p>
+
+<p>Get address of the first account registered ever: <code>TweetRegistry.getAddressOfId(0)</code>. Change ID to iterate over all accounts.</p>
+
+<p>Get name of account address: <code>TweetRegistry.getNameOfAddress("0x36b47d7c8fef8daf5d0b4477dcc8def158d4255f")</code></p>
+
+<h2>
+<a id="solidity-api" class="anchor" href="#solidity-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Solidity API</h2>
+
+<p>This decentralized app is written in the <code>Solidity</code> programming language. Documentation is available at <a href="http://solidity.readthedocs.org">solidity.readthedocs.org</a>.</p>
+
+<p>Have a look at the <code>README.md</code> in the <code>deploy</code> directory of this repository. It explains how compilation from <code>Solidity</code> source code to the Ethereum byte code was done.</p>
+
+<p>The <code>TweetAccount.sol</code> source file contains a lot of comments to explain what the code does.</p>
+
+<pre><code>contract TweetAccount{
+ function TweetAccount()
+ function getOwnerAddress()constant returns(address adminAddress)
+ function adminDeleteAccount()
+ function adminRetrieveDonations(address receiver)
+ function getLatestTweet()constant returns(string tweetString,uint256 timestamp,uint256 numberOfTweets)
+ function isAdmin()constant returns(bool isAdmin)
+ function getTweet(uint256 tweetId)constant returns(string tweetString,uint256 timestamp)
+ function getNumberOfTweets()constant returns(uint256 numberOfTweets)
+ function tweet(string tweetString)constant returns(int256 result)
+}
+
+contract TweetRegistry{
+ function TweetRegistry()
+ function adminUnregister(string name)
+ function register(string name,address accountAddress)returns(int256 result)
+ function getNumberOfAccounts()constant returns(uint256 numberOfAccounts)
+ function adminRetrieveDonations()
+ function getAddressOfName(string name)constant returns(address addr)
+ function adminDeleteRegistry()
+ function adminSetAccountAdministrator(address accountAdmin)
+ function adminSetRegistrationDisabled(bool registrationDisabled)
+ function getNameOfAddress(address addr)constant returns(string name)
+ function unregister()returns(string unregisteredAccountName)
+ function getAddressOfId(uint256 id)constant returns(address addr)
+}
+</code></pre>
+
+<h2>
+<a id="web3-javascript-api" class="anchor" href="#web3-javascript-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Web3 Javascript API</h2>
+
+<p>Geth uses javascript in its interactive interface. Documentation is available <a href="https://github.com/ethereum/wiki/wiki/JavaScript-API">here</a>.</p>
+
+<p>The javascript code used in the examples above was created automatically on deploy. See the <code>README.md</code> in the <code>deploy</code> directory for more information</p>
+
+<p>The files <code>deploy/tweet-account.deploy/interface.txt</code> and <code>deploy/tweet-registry.deploy/interface.txt</code> contain the actual javascript interface.</p>
+
+<h2>
+<a id="more-geth-commands" class="anchor" href="#more-geth-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>More Geth Commands</h2>
+
+<p>Get your account address (called coinbase):</p>
+
+<p><code>eth.coinbase</code></p>
+
+<p>You should see an ethereum account address starting with <code>0x</code>.</p>
+
+<p>Get number of pending transactions:</p>
+
+<p><code>eth.getBlockTransactionCount("pending")</code></p>
+
+<h2>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Links</h2>
+
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10711843">https://news.ycombinator.com/item?id=10711843</a></li>
+<li><a href="https://www.reddit.com/r/ethereum/comments/3w8za8/decentralised_twitter_microblogging_on_the/">https://www.reddit.com/r/ethereum/comments/3w8za8/decentralised_twitter_microblogging_on_the/</a></li>
+<li><a href="http://korben.info/un-clone-de-twitter-qui-utilise-la-blockchain.html">http://korben.info/un-clone-de-twitter-qui-utilise-la-blockchain.html</a></li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="http://choosealicense.com/licenses/gpl-3.0/">GPL v3</a></p>
+
+<pre><code>Copyright (C) 2015 Jahn Bertsch
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation in version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+</code></pre>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/yep/eth-tweet">EthTweet</a> is maintained by <a href="https://github.com/yep">yep</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
