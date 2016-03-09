@@ -262,6 +262,8 @@ Links
  - https://news.ycombinator.com/item?id=10711843
  - https://www.reddit.com/r/ethereum/comments/3w8za8/decentralised_twitter_microblogging_on_the/
  - http://korben.info/un-clone-de-twitter-qui-utilise-la-blockchain.html
+ - http://www.btc-echo.de/rise-of-the-dapps-sieben-dezentralisierte-apps-auf-ethereum-blockchain_2016022702
+ - http://www.coindesk.com/7-cool-decentralized-apps-built-ethereum
 
 License
 -------
