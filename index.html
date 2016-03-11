@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>EthTweet - Microblogging on the Ethereum Blockchain</title>
+    <title>EtherTweet by yep</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,9 +11,11 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">EthTweet</h1>
+      <h1 class="project-name">EtherTweet</h1>
       <h2 class="project-tagline">Microblogging on the Ethereum Blockchain</h2>
       <a href="https://github.com/yep/eth-tweet" class="btn">View on GitHub</a>
+      <a href="https://github.com/yep/eth-tweet/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/yep/eth-tweet/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
@@ -30,15 +32,19 @@
 
 <p>All accounts can receive <code>donations</code> in Ethereum's Ether crypto currency. Being able to receive donations can be an incentive to run a decentralized microblogging feed.</p>
 
-<p>To not expose the user's social graph to the world, following other accounts is not supported on purpose. However, you could still implement this feature on the client side.</p>
+<p>To not expose the user's social graph to the world, following other accounts is not supported on purpose.</p>
+
+<p>If you want to edit the source files, you can use Ethereum's Mix IDE which can be found <a href="https://github.com/ethereum/webthree-umbrella/releases">here</a>. In the repository, there is a Mix IDE project file called <code>.mix</code>, it also contains some test cases used during development. Mix can simulate a local blockchain for testing.</p>
 
 <h2>
 <a id="contents" class="anchor" href="#contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contents</h2>
 
 <ul>
-<li><a href="#ether">Ether</a></li>
 <li><a href="#install">Install</a></li>
-<li><a href="#read-tweets">Read Tweets</a></li>
+<li><a href="#read-tweets-in-the-web-browser">Read Tweets in the Web Browser</a></li>
+<li><a href="#using-the-geth-command-line">Using the Geth Command Line</a></li>
+<li><a href="#read-tweets-on-the-command-line">Read Tweets on the Command Line</a></li>
+<li><a href="#ether">Ether</a></li>
 <li><a href="#create-an-account">Create an Account</a></li>
 <li><a href="#post-a-new-tweet">Post a new Tweet</a></li>
 <li><a href="#register-account-name">Register Account Name</a></li>
@@ -48,28 +54,27 @@
 </ul>
 
 <h2>
-<a id="ether" class="anchor" href="#ether" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ether</h2>
-
-<p>For account creation, registration and tweeting, you have to get Ethereum's crypto currency <code>Ether</code>. You can either buy <code>Ether</code> for Dollar/Euro or trade <code>Ether</code> for Bitcoin. Instructions can be found here: <a href="https://www.ethereum.org/ether">ethereum.org/ether</a>. For example, you can use the <a href="https://kraken.com">kraken.com</a> crypto currency exchange.</p>
-
-<p>At time of writing, pricing is as follows:</p>
-
-<p>Price of account creation and registration: <code>0.02384905 ether</code> or <code>$0.020271693</code> or <code>€0,018392864</code> or <code>roughly 2 cents</code></p>
-
-<p>Price per Tweet: <code>0.00420185 ether</code> or <code>$0.0035715725</code> or <code>€0.0032405508</code> or <code>roughly one third of a cent</code></p>
-
-<p>For current rates see the currency pairs <code>eth/usd</code> or <code>eth/eur</code> on <a href="https://www.kraken.com/charts">kraken.com/charts</a>.</p>
-
-<p>If you like this project, please consider sending donations in Ether to <code>0x93a4a6c05c5cfb945f6ccaea223723561670c204</code> or donations in Bitcoin to <code>3PyW7MNRJzpw13JFVendeTFt7dcXmFq4pd</code>.</p>
-
-<h2>
 <a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
 
 <p><a href="https://www.ethereum.org/cli">Install geth</a> and start it by entering</p>
 
-<p><code>geth</code></p>
+<p><code>geth --rpc --rpccorsdomain="http://ethertweet.net"</code></p>
 
-<p>In a second shell, start the interactive geth interface by running</p>
+<h2>
+<a id="read-tweets-in-the-web-browser" class="anchor" href="#read-tweets-in-the-web-browser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read Tweets in the Web Browser</h2>
+
+<p>In your web browser, open <a href="http://ethertweet.net/ui">http://ethertweet.net/ui</a></p>
+
+<p>You should see a menu of existing account and the corresponding tweets, as shown in this picture:</p>
+
+<p><img src="http://ethertweet.net/EtherTweetScreenshot.png" alt="EtherTweetScreenshot"></p>
+
+<h2>
+<a id="using-the-geth-command-line" class="anchor" href="#using-the-geth-command-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using the Geth Command Line</h2>
+
+<p>Posting tweets is not yet supported using the web browser. Instead, you have to use the geth command line.</p>
+
+<p>After starting geth as shown above, open a second shell and start the interactive geth interface by running</p>
 
 <p><code>geth attach</code></p>
 
@@ -81,12 +86,10 @@
 
 <p>You should see various ethereum statistics like the current block number.</p>
 
-<p>Edit the source files with the Ethereum's Mix IDE which can be found in the <a href="https://github.com/ethereum/webthree-umbrella/releases">releases</a>. There is a <code>.mix</code> Mix IDE project file in the repository, it also contains some test cases used during development and can simulate a local blockchain for testing.</p>
-
 <p>All commands below assume you are in the interactive geth interface.</p>
 
 <h2>
-<a id="read-tweets" class="anchor" href="#read-tweets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read Tweets</h2>
+<a id="read-tweets-on-the-command-line" class="anchor" href="#read-tweets-on-the-command-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read Tweets on the Command Line</h2>
 
 <p>An example how to read tweets of an existing account.</p>
 
@@ -118,6 +121,21 @@
 <p>Get a specific tweet. For example, get the first tweet, tweet number 0:</p>
 
 <p><code>TweetAccount.getTweet(0)</code></p>
+
+<h2>
+<a id="ether" class="anchor" href="#ether" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ether</h2>
+
+<p>For account creation, registration and tweeting, you have to get Ethereum's crypto currency <code>Ether</code>. You can either buy <code>Ether</code> for Dollar/Euro or trade <code>Ether</code> for Bitcoin. Instructions can be found here: <a href="https://www.ethereum.org/ether">ethereum.org/ether</a>. For example, you can use the <a href="https://kraken.com">kraken.com</a> crypto currency exchange.</p>
+
+<p>At time of writing (December 2015), pricing is as follows:</p>
+
+<p>Price of account creation and registration: <code>0.02384905 ether</code> or <code>$0.020271693</code> or <code>€0,018392864</code> or <code>roughly 2 cents</code></p>
+
+<p>Price per Tweet: <code>0.00420185 ether</code> or <code>$0.0035715725</code> or <code>€0.0032405508</code> or <code>roughly one third of a cent</code></p>
+
+<p>For current rates see the currency pairs <code>eth/usd</code> or <code>eth/eur</code> on <a href="https://www.kraken.com/charts">kraken.com/charts</a>.</p>
+
+<p>If you like this project, please consider sending donations in Ether to <code>0x93a4a6c05c5cfb945f6ccaea223723561670c204</code> or donations in Bitcoin to <code>3PyW7MNRJzpw13JFVendeTFt7dcXmFq4pd</code>.</p>
 
 <h2>
 <a id="create-an-account" class="anchor" href="#create-an-account" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create an Account</h2>
@@ -171,6 +189,13 @@
 <p><code>MyTweetAccount.getTweet(0)</code></p>
 
 <p>Should return <code>["hello world", 1449750863, 1]</code></p>
+
+<p>If you want to post another tweet at a later time, do the following:</p>
+
+<ul>
+<li>Define a variable for your tweet account as described in section <code>Reading Tweets on the Command Line</code>.</li>
+<li>Post a new tweet by creating a transaction with <code>tweet.sendTransaction</code> as descibed in this section.</li>
+</ul>
 
 <h2>
 <a id="register-account-name" class="anchor" href="#register-account-name" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Register Account Name</h2>
@@ -294,7 +319,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 </code></pre>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/yep/eth-tweet">EthTweet</a> is maintained by <a href="https://github.com/yep">yep</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/yep/eth-tweet">EtherTweet</a> is maintained by <a href="https://github.com/yep">yep</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
