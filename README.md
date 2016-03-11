@@ -11,15 +11,18 @@ The system is `censorship resistant` in the sense that once a message is publish
 
 All accounts can receive `donations` in Ethereum's Ether crypto currency. Being able to receive donations can be an incentive to run a decentralized microblogging feed.
 
-To not expose the user's social graph to the world, following other accounts is not supported on purpose. However, you could still implement this feature on the client side.
+To not expose the user's social graph to the world, following other accounts is not supported on purpose.
 
+If you want to edit the source files, you can use Ethereum's Mix IDE which can be found [here](https://github.com/ethereum/webthree-umbrella/releases). In the repository, there is a Mix IDE project file called `.mix`, it also contains some test cases used during development. Mix can simulate a local blockchain for testing.
 
 Contents
 --------
 
- - [Ether](#ether)
  - [Install](#install)
- - [Read Tweets](#read-tweets)
+ - [Read Tweets in the Web Browser](#read-tweets-in-the-web-browser)
+ - [Using the Geth Command Line](#using-the-geth-command-line)
+ - [Read Tweets on the Command Line](#read-tweets-on-the-command-line)
+ - [Ether](#ether)
  - [Create an Account](#create-an-account)
  - [Post a new Tweet](#post-a-new-tweet)
  - [Register Account Name](#register-account-name)
@@ -28,30 +31,30 @@ Contents
  - [Web3 Javascript API](#web3-javascript-api)
 
 
-Ether
------
-
-For account creation, registration and tweeting, you have to get Ethereum's crypto currency `Ether`. You can either buy `Ether` for Dollar/Euro or trade `Ether` for Bitcoin. Instructions can be found here: [ethereum.org/ether](https://www.ethereum.org/ether). For example, you can use the [kraken.com](https://kraken.com) crypto currency exchange.
-
-At time of writing, pricing is as follows:
-
-Price of account creation and registration: `0.02384905 ether` or `$0.020271693` or `€0,018392864` or `roughly 2 cents`
-
-Price per Tweet: `0.00420185 ether` or `$0.0035715725` or `€0.0032405508` or `roughly one third of a cent`
-
-For current rates see the currency pairs `eth/usd` or `eth/eur` on [kraken.com/charts](https://www.kraken.com/charts).
-
-If you like this project, please consider sending donations in Ether to `0x93a4a6c05c5cfb945f6ccaea223723561670c204` or donations in Bitcoin to `3PyW7MNRJzpw13JFVendeTFt7dcXmFq4pd`.
-
-
 Install
 -------
 
 [Install geth](https://www.ethereum.org/cli) and start it by entering
 
-`geth`
+`geth --rpc --rpccorsdomain="http://ethertweet.net"`
 
-In a second shell, start the interactive geth interface by running
+
+Read Tweets in the Web Browser
+------------------------------
+
+In your web browser, open [http://ethertweet.net/ui](http://ethertweet.net/ui)
+
+You should see a menu of existing account and the corresponding tweets, as shown in this picture:
+
+![EtherTweetScreenshot](http://ethertweet.net/EtherTweetScreenshot.png)
+
+
+Using the Geth Command Line
+---------------------------
+
+Posting tweets is not yet supported using the web browser. Instead, you have to use the geth command line.
+
+After starting geth as shown above, open a second shell and start the interactive geth interface by running
 
 `geth attach`
 
@@ -63,13 +66,11 @@ As a test, get the status by entering:
 
 You should see various ethereum statistics like the current block number.
 
-Edit the source files with the Ethereum's Mix IDE which can be found in the [releases](https://github.com/ethereum/webthree-umbrella/releases). There is a `.mix` Mix IDE project file in the repository, it also contains some test cases used during development and can simulate a local blockchain for testing.
-
 All commands below assume you are in the interactive geth interface.
 
 
-Read Tweets
------------
+Read Tweets on the Command Line
+-------------------------------
 
 An example how to read tweets of an existing account.
 
@@ -102,6 +103,22 @@ Get total number of tweets:
 Get a specific tweet. For example, get the first tweet, tweet number 0:
 
 `TweetAccount.getTweet(0)`
+
+
+Ether
+-----
+
+For account creation, registration and tweeting, you have to get Ethereum's crypto currency `Ether`. You can either buy `Ether` for Dollar/Euro or trade `Ether` for Bitcoin. Instructions can be found here: [ethereum.org/ether](https://www.ethereum.org/ether). For example, you can use the [kraken.com](https://kraken.com) crypto currency exchange.
+
+At time of writing (December 2015), pricing is as follows:
+
+Price of account creation and registration: `0.02384905 ether` or `$0.020271693` or `€0,018392864` or `roughly 2 cents`
+
+Price per Tweet: `0.00420185 ether` or `$0.0035715725` or `€0.0032405508` or `roughly one third of a cent`
+
+For current rates see the currency pairs `eth/usd` or `eth/eur` on [kraken.com/charts](https://www.kraken.com/charts).
+
+If you like this project, please consider sending donations in Ether to `0x93a4a6c05c5cfb945f6ccaea223723561670c204` or donations in Bitcoin to `3PyW7MNRJzpw13JFVendeTFt7dcXmFq4pd`.
 
 
 Create an Account
@@ -158,6 +175,11 @@ Should return `1`
 `MyTweetAccount.getTweet(0)`
 
 Should return `["hello world", 1449750863, 1]`
+
+If you want to post another tweet at a later time, do the following:
+
+ - Define a variable for your tweet account as described in section `Reading Tweets on the Command Line`.
+ - Post a new tweet by creating a transaction with `tweet.sendTransaction` as descibed in this section.
 
 
 Register Account Name
@@ -232,6 +254,7 @@ contract TweetRegistry{
 }
 ```
 
+
 Web3 Javascript API
 -------------------
 
@@ -264,6 +287,7 @@ Links
  - http://korben.info/un-clone-de-twitter-qui-utilise-la-blockchain.html
  - http://www.btc-echo.de/rise-of-the-dapps-sieben-dezentralisierte-apps-auf-ethereum-blockchain_2016022702
  - http://www.coindesk.com/7-cool-decentralized-apps-built-ethereum
+
 
 License
 -------
