@@ -29,6 +29,7 @@ Contents
  - [Browse Accounts](#browse-accounts)
  - [Solidity API](#solidity-api)
  - [Web3 Javascript API](#web3-javascript-api)
+ - [Contributors](#contributors)
 
 
 Install
@@ -42,9 +43,9 @@ Install
 Read Tweets in the Web Browser
 ------------------------------
 
-In your web browser, open [http://ethertweet.net/ui](http://ethertweet.net/ui)
+With geth running, open [http://ethertweet.net/ui](http://ethertweet.net/ui) in your web browser.
 
-You should see a menu of existing account and the corresponding tweets, as shown in this picture:
+You should see a menu of existing accounts and the corresponding tweets, as shown in this picture:
 
 ![EtherTweetScreenshot](http://ethertweet.net/EtherTweetScreenshot.png)
 
@@ -279,6 +280,11 @@ Get number of pending transactions:
 `eth.getBlockTransactionCount("pending")`
 
 
+Contributors
+------------
+
+ - digitaldonkey - [Web Browser User Interface](https://github.com/digitaldonkey/ethTweetUi)
+
 Links
 -----
 
@@ -295,7 +301,7 @@ License
 [GPL v3](http://choosealicense.com/licenses/gpl-3.0/)
 
 ```
-Copyright (C) 2015 Jahn Bertsch
+Copyright (C) 2015-2016 Jahn Bertsch
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
