@@ -96,7 +96,7 @@
 
 <p>See section <code>Browse Accounts</code> below, to learn how to explore all existing accounts.</p>
 
-<p>Create a local variable <code>TweetAccount</code> to point to the existing account. Here, the address of the test account <code>0x9e82d1745c6c9c04a6cfcde102837cf0f25efc56</code> is used. Change this address in the code block below to read tweets of other accounts.</p>
+<p>Create a local variable <code>TweetAccount</code> to point to the existing account. Here, the address of the test account <code>0x9e82d1745c6c9c04a<br />6cfcde102837cf0f25efc56</code> is used. Change this address in the code block below to read tweets of other accounts.</p>
 
 <p>Copy the following code block and paste it into the interactive geth interface:</p>
 
@@ -169,11 +169,11 @@
 
 <p>This example tweets <code>hello world</code> with the <code>MyTweetAccount</code> created above:</p>
 
-<p><code>MyTweetAccount.tweet.sendTransaction("hello world", {from: eth.coinbase, gas: 200000})</code></p>
+<p><code>MyTweetAccount.tweet.sendTransaction<br />("hello world", {from: eth.coinbase, gas: 200000})</code></p>
 
 <p>Note that you have to own <code>Ether</code> to be able to tweet. See previous example how to check your account balance.</p>
 
-<p>You should see a message like <code>I1210 13:33:35.411646   58618 xeth.go:1028] Tx(0x8b253799a87efd08133e4f2b7dcec<br />e785a05d6de075c92435da48cb61009ac7e) to: 0x9e82d1745c6c9c04a6cfcde102837cf0f25efc56</code> in the geth logs.</p>
+<p>You should see a message like <code>I1210 13:33:35.411646   58618 xeth.go:1028] Tx(0x8b253799a87efd08133e4f2b7dcec<br />e785a05d6de075c92435da48cb61009ac7e) to: 0x9e82d1745c6c9c04a6<br />cfcde102837cf0f25efc56</code> in the geth logs.</p>
 
 <p>Check:</p>
 
@@ -212,7 +212,7 @@
 
 <p>Register account name <code>test</code> for the account <code>MyTweetAccount</code> (from the previous example) into the <code>TweetRegistry</code>. Please note you have to use a different account name than "test" since it is already taken.</p>
 
-<p><code>TweetRegistry.register.sendTransaction("test", MyTweetAccount.address, {from: eth.coinbase, gas: 200000})</code></p>
+<p><code>TweetRegistry.register.sendTransaction<br />("test", MyTweetAccount.address, {from: eth.coinbase, gas: 200000})</code></p>
 
 <h2>
 <a id="browse-accounts" class="anchor" href="#browse-accounts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Browse Accounts</h2>
