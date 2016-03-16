@@ -111,11 +111,20 @@ Ether
 
 For account creation, registration and tweeting, you have to get Ethereum's crypto currency `Ether`. You can either buy `Ether` for Dollar/Euro or trade `Ether` for Bitcoin. Instructions can be found here: [ethereum.org/ether](https://www.ethereum.org/ether). For example, you can use the [kraken.com](https://kraken.com) crypto currency exchange.
 
-At time of writing (December 2015), pricing is as follows:
+Pricing is as following:
 
-Price of account creation and registration: `0.02384905 ether` or `$0.020271693` or `€0,018392864` or `roughly 2 cents`
+| Date          | Account Creation      | Price per Tweet
+|---------------|--------------------------------------------------------|
+| 2015 December | `0.02384905 ether` or | `0.00420185 ether` or          |
+|               | `$0.020271693` or     | `$0.0035715725` or             |
+|               | `€0,018392864` or     | `€0.0032405508` or             |
+|               | `roughly 2 cents`     | `roughly one third of a cent`  |
+|---------------|-----------------------|--------------------------------|
+| 2016 March    | `0.00772476 ether`    | `0.00182126` ether             |
+|               | `$0.10` or            | `$0.02` or                     |
+|               | `€0.09` or            | `€0.02` or                     |
+|               | `roughly 10 cents`    | `roughly two cents`            |
 
-Price per Tweet: `0.00420185 ether` or `$0.0035715725` or `€0.0032405508` or `roughly one third of a cent`
 
 For current rates see the currency pairs `eth/usd` or `eth/eur` on [kraken.com/charts](https://www.kraken.com/charts).
 
