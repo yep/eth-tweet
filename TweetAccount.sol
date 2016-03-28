@@ -45,7 +45,7 @@ contract TweetAccount {
 	}
 	
 	// create new tweet
-	function tweet(string tweetString) constant returns (int result) {
+	function tweet(string tweetString) returns (int result) {
 		if (!isAdmin()) {
 			// only owner is allowed to create tweets for this account
 			result = -1;
