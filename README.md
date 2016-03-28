@@ -114,15 +114,12 @@ For account creation, registration and tweeting, you have to get Ethereum's cryp
 Pricing is as following:
 
 | Date          | Account Creation      | Price per Tweet
-|---------------|--------------------------------------------------------|
+| --------------|-----------------------|--------------------------------|
 | 2015 December | `0.02384905 ether` or | `0.00420185 ether` or          |
-|               | `$0.020271693` or     | `$0.0035715725` or             |
-|               | `€0,018392864` or     | `€0.0032405508` or             |
+|               | `$0.020`/`€0,018`  or | `$0.003`/`€0.003`              |
 |               | `roughly 2 cents`     | `roughly one third of a cent`  |
-|---------------|-----------------------|--------------------------------|
-| 2016 March    | `0.00772476 ether`    | `0.00182126` ether             |
-|               | `$0.10` or            | `$0.02` or                     |
-|               | `€0.09` or            | `€0.02` or                     |
+| 2016 March    | `0.00772476 ether` or | `0.00182126` ether or          |
+|               | `$0.10`/`€0.09` or    | `$0.02`/`€0.02` or             |
 |               | `roughly 10 cents`    | `roughly two cents`            |
 
 
