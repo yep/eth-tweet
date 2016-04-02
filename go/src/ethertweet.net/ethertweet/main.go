@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/big"
 
+	"ethertweet.net/ethertweet/lib"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
 	"github.com/ethereum/go-ethereum/core"
@@ -23,14 +24,14 @@ func main() {
 	auth := bind.NewKeyedTransactor(key)
 
 	// Deploy a contract on the simulated blockchain
-	tweetAccountAddress, _, tweetAccount, err := DeployTweetAccount(auth, simulator)
+	tweetAccountAddress, _, tweetAccount, err := ethertweet.DeployTweetAccount(auth, simulator)
 	if err != nil {
 		log.Fatalf("Failed to deploy TweetAccount contract: %v", err)
 	}
 	fmt.Printf("TweetAccount address: 0x%x\n", tweetAccountAddress)
 
 	// Wrap the contract instance into a session
-	tweetAccountSession := &TweetAccountSession{
+	tweetAccountSession := &ethertweet.TweetAccountSession{
 		Contract: tweetAccount,
 		CallOpts: bind.CallOpts{
 			Pending: false,

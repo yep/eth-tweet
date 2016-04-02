@@ -1,15 +1,16 @@
 // This file is an automatically generated Go binding. Do not modify as any
 // change will likely be lost upon the next re-generation!
 
-package main
+package ethertweet
 
 import (
 	"math/big"
 	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/accounts/abi"
 )
 
 // TweetRegistryABI is the input ABI used to generate the binding from.
@@ -69,6 +70,21 @@ type TweetRegistryTransactorSession struct {
 	TransactOpts bind.TransactOpts        // Transaction auth options to use throughout this session
 }
 
+// TweetRegistryRaw is an auto generated low-level Go binding around an Ethereum contract.
+type TweetRegistryRaw struct {
+	Contract *TweetRegistry // Generic contract binding to access the raw methods on
+}
+
+// TweetRegistryCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+type TweetRegistryCallerRaw struct {
+	Contract *TweetRegistryCaller // Generic read-only contract binding to access the raw methods on
+}
+
+// TweetRegistryTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+type TweetRegistryTransactorRaw struct {
+	Contract *TweetRegistryTransactor // Generic write-only contract binding to access the raw methods on
+}
+
 // NewTweetRegistry creates a new instance of TweetRegistry, bound to a specific deployed contract.
 func NewTweetRegistry(address common.Address, backend bind.ContractBackend) (*TweetRegistry, error) {
 	contract, err := bindTweetRegistry(address, backend.(bind.ContractCaller), backend.(bind.ContractTransactor))
@@ -103,6 +119,44 @@ func bindTweetRegistry(address common.Address, caller bind.ContractCaller, trans
 		return nil, err
 	}
 	return bind.NewBoundContract(address, parsed, caller, transactor), nil
+}
+
+// Call invokes the (constant) contract method with params as input values and
+// sets the output to result. The result type might be a single field for simple
+// returns, a slice of interfaces for anonymous returns and a struct for named
+// returns.
+func (_TweetRegistry *TweetRegistryRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+	return _TweetRegistry.Contract.TweetRegistryCaller.contract.Call(opts, result, method, params...)
+}
+
+// Transfer initiates a plain transaction to move funds to the contract, calling
+// its default method if one is available.
+func (_TweetRegistry *TweetRegistryRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _TweetRegistry.Contract.TweetRegistryTransactor.contract.Transfer(opts)
+}
+
+// Transact invokes the (paid) contract method with params as input values.
+func (_TweetRegistry *TweetRegistryRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _TweetRegistry.Contract.TweetRegistryTransactor.contract.Transact(opts, method, params...)
+}
+
+// Call invokes the (constant) contract method with params as input values and
+// sets the output to result. The result type might be a single field for simple
+// returns, a slice of interfaces for anonymous returns and a struct for named
+// returns.
+func (_TweetRegistry *TweetRegistryCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+	return _TweetRegistry.Contract.contract.Call(opts, result, method, params...)
+}
+
+// Transfer initiates a plain transaction to move funds to the contract, calling
+// its default method if one is available.
+func (_TweetRegistry *TweetRegistryTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _TweetRegistry.Contract.contract.Transfer(opts)
+}
+
+// Transact invokes the (paid) contract method with params as input values.
+func (_TweetRegistry *TweetRegistryTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _TweetRegistry.Contract.contract.Transact(opts, method, params...)
 }
 
 // GetAddressOfId is a free data retrieval call binding the contract method 0xec43eeb6.
