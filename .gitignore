@@ -1,3 +1,5 @@
 .idea
+.vagrant
+*.swp
 go/bin
 go/pkg

@@ -1,14 +1,19 @@
-# Go Bindings for EtherTweet
+# EtherTweet API Server
 
-Generate native [go](https://golang.org) bindings for the `EtherTweet` [Solidity](https://solidity.readthedocs.org) code.
+This directory contains native [go](https://golang.org) bindings for the EtherTweet [Solidity](https://solidity.readthedocs.org) code.
+
+Using these bindings, a simple JSON HTTP API is implemented.
 
 See the Ethereum Wiki on page [Native-DApps](https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts) for more info.
 
-## Setup
 
-Install `go`. On OSX, for example using the [homebrew package manager](http://brew.sh):
+## Setup on OSX
+
+Install `go`, for example using the [homebrew package manager](http://brew.sh):
 
     brew install go
+    
+[Install the solidity compiler](http://www.ethdocs.org/en/latest/ethereum-clients/cpp-ethereum/index.html#installing-and-building). The `solc` command has to be available below.
 
 Get the source code of `EtherTweet`. Set `GOPATH` environment variable. Change to subdirectory `go` of the `eth-tweet` directory. Run update script. The commands are:
 
@@ -17,19 +22,38 @@ Get the source code of `EtherTweet`. Set `GOPATH` environment variable. Change t
     export GOPATH=$(pwd)
     ./update-go-bindings.sh
 
-The `ethertweet` binary should now be available at `eth-tweet/go/bin/ethertweet`.
-
 Assuming you have set the GOPATH as described above, you can run the `ethertweet` binary now by typing:
 
      ethertweet
+     
+Server should then be running at `http://localhost:8080`
 
-It should run some tests on a simulated blockchain with an output similar to:
+Run some tests on a simulated blockchain:
 
-    TweetAccount address: 0xcf7309e18faa8c166019496de2a831217df3ad1c
+    go test -v ethertweet.net/ethertweet
+    
+Output should be similar to:
+
+    TweetAccount address: 0x5dd637cb09774c3e946966db2dace2b73bd21082
     TweetAccount getNumberOfTweets: 1
     TweetAccount getLatestTweet: hello world
 
-With the GOPATH set as above and after having run the setup script once, you can recompile the `ethertweet` binary like this later:
+With the GOPATH set as above and after having run the setup script once, you can recompile the `ethertweet` binary like this:
 
     go install ethertweet.net/ethertweet
+
+
+## Setup in a Virtual Machine
+
+Setup on a fresh Ubuntu Server 16.04 Virtual Machine (VM). You can have a look at the commands used for install in the `Vagrantfile`.
+
+ - Install [Virtualbox](http://virtualbox.org) and [Vagrant](http://vagrantup.com)
+ - Run `vagrant up`
+
+
+## Blockchain rsync
+
+Downloading the blockchain takes a long time, even using `geth --fast`. Copy existing blockchain data from a linux host with rsync over ssh:
+
+    rsync -avz -e 'ssh -i /home/USER/.ssh/KEY' /PATH/.ethereum/ USER@HOST:/PATH/.ethereum
 

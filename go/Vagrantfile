@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/wily64"
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.synced_folder "..", "/home/vagrant/shared"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    set -x
+    wget -c https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz
+    tar xfz go1.6.2.linux-amd64.tar.gz
+    sudo mv go /usr/local/go
+    which go || echo 'export PATH=$PATH:/usr/local/go/bin' >> /home/vagrant/.profile 
+    which go || echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.profile 
+    source ~/.profile 
+
+    sudo add-apt-repository ppa:ethereum/ethereum-qt
+    sudo add-apt-repository ppa:ethereum/ethereum
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get install -y git gcc make cpp-ethereum
+    git clone https://github.com/yep/eth-tweet.git
+    cd eth-tweet/go
+    export GOPATH=$(pwd)
+    ./update-go-bindings.sh
+    cd ../..
+    ln -s eth-tweet/go/bin/geth .
+    ln -s eth-tweet/go/bin/ethertweet .
+    chown -R vagrant:vagrant .
+  SHELL
+end
