@@ -5,7 +5,7 @@
 
 # change to directory this script is located at and set gopath to it
 cd "$(dirname "$0")"
-GOPATH=$(pwd)
+export GOPATH=$(pwd)
 
 go get github.com/tools/godep
 
