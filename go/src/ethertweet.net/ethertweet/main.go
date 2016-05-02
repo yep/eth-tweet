@@ -51,7 +51,7 @@ func main() {
 func createRpcBackend() bind.ContractBackend {
 	conn, err := rpc.NewIPCClient(getIPCSocketPath())
 	if err != nil {
-		log.Printf("Failed to connect to the Ethereum client: %v", err)
+		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
 
 	return backends.NewRPCBackend(conn)
