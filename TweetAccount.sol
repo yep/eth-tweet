@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 // "class" TweetAccount
+pragma solidity ^0.4.11;
 contract TweetAccount {
 	
 	// data structure of a single tweet
@@ -84,7 +85,7 @@ contract TweetAccount {
 	// other users can send donations to your account: use this function for donation withdrawal
 	function adminRetrieveDonations(address receiver) {
 		if (isAdmin()) {
-			receiver.send(this.balance);
+			receiver.transfer(this.balance);
 		}
 	}
 	
